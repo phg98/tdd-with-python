@@ -25,11 +25,14 @@ class NewVisitorTest(unittest.TestCase):
         inputbox.send_keys('시장에서 미역 사기')
 
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(1)
+        time.sleep(2)
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_element_by_tag_name('tr')
-        self.assertTrue(any(row.text == '1: 시장에서 미역 사기' for row in rows), 'New item not displayed')
+        self.assertTrue(
+            #any(row.text == '1: 시장에서 미역 사기' for row in rows),
+            rows.text == '시장에서 미역 사기',
+            'New item not displayed. Contents were:\n{}'.format(table.text))
 
         self.fail('테스트 종료')
 
