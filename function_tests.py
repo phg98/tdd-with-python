@@ -29,7 +29,7 @@ class NewVisitorTest(unittest.TestCase):
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_element_by_tag_name('tr')
-        self.assertTrue(any(row.text == '1: 시장에서 미역 사기' for row in rows))
+        self.assertTrue(any(row.text == '1: 시장에서 미역 사기' for row in rows), 'New item not displayed')
 
         self.fail('테스트 종료')
 
