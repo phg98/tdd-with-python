@@ -30,7 +30,7 @@ class NewVisitorTest(unittest.TestCase):
         # input 1 item
         inputbox.send_keys('시장에서 미역 사기')
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(2)
+        time.sleep(5)
 
         # check 1 item
         self.check_for_row_in_list_table('1: 시장에서 미역 사기')
@@ -39,7 +39,7 @@ class NewVisitorTest(unittest.TestCase):
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('공작깃털을 이용해서 그물 만들기')
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(2)
+        time.sleep(5)
 
         # two items in the list
         self.check_for_row_in_list_table('1: 시장에서 미역 사기')
