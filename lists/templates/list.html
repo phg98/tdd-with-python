@@ -1,19 +1,17 @@
 <html>
 <title>To-do</title>
 <body>
-<h1>작업 목록 시작</h1>
+<h1>To-do list</h1>
 
-<form method="POST">
+<form method="POST" action="/">
     <input id="id_new_item" name="item_text" placeholder="할일을 입력하세요" />
     {% csrf_token %}
 </form>
-<!--
 <table id="id_list_table">
-        {% for item in item_list %}
-            <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
-        {% endfor %}
+    {% for item in item_list %}
+    <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
+    {% endfor %}
 
 </table>
--->
 </body>
 </html>

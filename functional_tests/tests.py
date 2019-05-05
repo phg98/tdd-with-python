@@ -23,7 +23,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('To-do', self.browser.title)
 
         header_text = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn('To-do list', header_text)
+        self.assertIn('작업 목록 시작', header_text)
 
         inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertEqual(inputbox.get_attribute('placeholder'), '할일을 입력하세요')
@@ -63,6 +63,7 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('우유 사기')
         inputbox.send_keys(Keys.ENTER)
+        time.sleep(5)
 
         # Francis gets new URL
         francis_list_url = self.browser.current_url
