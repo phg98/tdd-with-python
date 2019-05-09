@@ -75,5 +75,26 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertNotIn('공작깃털', page_text)
         self.assertIn('우유', page_text)
 
-        self.fail('테스트 종료')
+    def test_layout_and_styling(self):
+        # Edith visits home page
+        self.browser.get(self.live_server_url)
+        self.browser.set_window_size(1024, 768)
 
+        # Input box at the center
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] / 2,
+            512,
+            delta=10
+        )
+
+        # Start new list and check input box is in the center
+        inputbox.send_keys('testing')
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(5)
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] / 2,
+            512,
+            delta=10
+        )
