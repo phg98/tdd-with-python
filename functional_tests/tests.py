@@ -8,6 +8,8 @@ from selenium.webdriver.common.keys import Keys
 
 
 class NewVisitorTest(StaticLiveServerTestCase):
+    sleeptime = 3
+
     def setUp(self):
         self.browser = webdriver.Firefox()
 
@@ -20,6 +22,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn(row_text, [row.text for row in rows])
 
     def test_can_start_a_list_and_retrieve_it_later(self):
+        sleeptime = self.sleeptime
+
         self.browser.get(self.live_server_url)
         self.assertIn('To-do', self.browser.title)
 
@@ -32,7 +36,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         # Enter input redirects to new URL and add item to list
         inputbox.send_keys('시장에서 미역 사기')
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(5)
+        time.sleep(sleeptime)
         edith_list_url = self.browser.current_url
         self.assertRegex(edith_list_url, '/lists/.+')
         self.check_for_row_in_list_table('1: 시장에서 미역 사기')
@@ -41,7 +45,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('공작깃털을 이용해서 그물 만들기')
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(5)
+        time.sleep(sleeptime)
 
         # two items in the list
         self.check_for_row_in_list_table('1: 시장에서 미역 사기')
@@ -64,7 +68,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('우유 사기')
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(5)
+        time.sleep(sleeptime)
 
         # Francis gets new URL
         francis_list_url = self.browser.current_url
@@ -77,6 +81,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn('우유', page_text)
 
     def test_layout_and_styling(self):
+        sleeptime = self.sleeptime
+
         # Edith visits home page
         self.browser.get(self.live_server_url)
         self.browser.set_window_size(1024, 768)
@@ -92,7 +98,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         # Start new list and check input box is in the center
         inputbox.send_keys('testing')
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(5)
+        time.sleep(sleeptime)
         inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertAlmostEqual(
             inputbox.location['x'] + inputbox.size['width'] / 2,
