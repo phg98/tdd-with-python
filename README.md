@@ -23,7 +23,13 @@
   ```
   
 ## 기능 테스트
+```batch
 python manage.py test functional_tests
+```
+* 각 파일별로 실행하려면 다음과 같이 한다.
+```batch
+python manage.py test functional_tests._file_name_
+```
 
 ## 유닛 테스트
 python manage.py test lists

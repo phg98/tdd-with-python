@@ -1,26 +1,15 @@
+from functional_tests.base import FunctionalTest
+#import os
 import time
-import unittest
+#import unittest
 
-from django.test import LiveServerTestCase
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+#from django.test import LiveServerTestCase
+#from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-class NewVisitorTest(StaticLiveServerTestCase):
-    sleeptime = 3
-
-    def setUp(self):
-        self.browser = webdriver.Firefox()
-
-    def tearDown(self):
-        self.browser.quit()
-
-    def check_for_row_in_list_table(self, row_text):
-        table = self.browser.find_element_by_id('id_list_table')
-        rows = table.find_elements_by_tag_name('tr')
-        self.assertIn(row_text, [row.text for row in rows])
-
+class NewVisitorTest(FunctionalTest):
     def test_can_start_a_list_and_retrieve_it_later(self):
         sleeptime = self.sleeptime
 
@@ -79,29 +68,3 @@ class NewVisitorTest(StaticLiveServerTestCase):
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('공작깃털', page_text)
         self.assertIn('우유', page_text)
-
-    def test_layout_and_styling(self):
-        sleeptime = self.sleeptime
-
-        # Edith visits home page
-        self.browser.get(self.live_server_url)
-        self.browser.set_window_size(1024, 768)
-
-        # Input box at the center
-        inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertAlmostEqual(
-            inputbox.location['x'] + inputbox.size['width'] / 2,
-            245,
-            delta=10
-        )
-
-        # Start new list and check input box is in the center
-        inputbox.send_keys('testing')
-        inputbox.send_keys(Keys.ENTER)
-        time.sleep(sleeptime)
-        inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertAlmostEqual(
-            inputbox.location['x'] + inputbox.size['width'] / 2,
-            245,
-            delta=10
-        )

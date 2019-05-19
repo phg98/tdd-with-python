@@ -60,7 +60,7 @@
             "jinja": true
         },
         {
-            "name": "Python: temp Django",
+            "name": "Python: folder Django",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/manage.py",
@@ -68,6 +68,16 @@
             "args": [
                 "test",
                 "functional_tests",
+            ]
+        },
+        {
+            "name": "Python: file Django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "test",
+                "functional_tests.${module}.py",
             ]
         }
     ]
