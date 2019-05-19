@@ -2,11 +2,12 @@ import time
 import unittest
 
 from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
 
@@ -50,7 +51,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         ## use new browser sesstoin
         self.browser.quit()
-        self.browser = webdriver.Firefox();
+        self.browser = webdriver.Firefox()
 
         # Francis connects to home page.
         # Edith's list should NOT be shown
@@ -84,7 +85,7 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertAlmostEqual(
             inputbox.location['x'] + inputbox.size['width'] / 2,
-            512,
+            245,
             delta=10
         )
 
@@ -95,6 +96,6 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertAlmostEqual(
             inputbox.location['x'] + inputbox.size['width'] / 2,
-            512,
+            245,
             delta=10
         )
