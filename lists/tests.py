@@ -8,8 +8,8 @@ from lists.views import home_page
 
 class HomePageTest(TestCase):
     def test_root_url(self):
-        fount = resolve('/')
-        self.assertEqual(fount.func, home_page)
+        found = resolve('/')
+        self.assertEqual(found.func, home_page)
 
     def test_home_page_returns_correct_html(self):
         response = self.client.get('/')
